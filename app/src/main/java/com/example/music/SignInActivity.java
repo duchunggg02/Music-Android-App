@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     private Button buttonLogin;
-    private Button btn_Register, btn_Skip;
+    private TextView btn_Register,btn_Skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,12 @@ public class SignInActivity extends AppCompatActivity {
                 String username = editTextUsername.getText().toString();
                 String password = editTextPassword.getText().toString();
 
+                if(!username.isEmpty() && !password.isEmpty()) {
                 DatabaseHelper db = new DatabaseHelper(SignInActivity.this);
                 boolean isValid = db.isUserValid(username, password);
 
                 if (isValid) {
-                    Toast.makeText(SignInActivity.this, "Đăng nhập thành công!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -70,7 +72,10 @@ public class SignInActivity extends AppCompatActivity {
 
                 } else {
                     // Đăng nhập thất bại
-                    Toast.makeText(SignInActivity.this, "Đăng nhập không thành công!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                    Toast.makeText(SignInActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
             }
         });

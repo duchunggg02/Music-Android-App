@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/white"
+    tools:context=".HomeFragment">
+
+    <TextView
+        android:id="@+id/tv_hello"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/music"
+        android:textSize="25sp"
+        android:text="XIN CHÀO"
+        android:textStyle="bold"/>
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Nhập ở đây..."
+        android:iconifiedByDefault="false"
+        android:background="@drawable/custom_searchview"
+        />
+    <Spinner
+        android:id="@+id/spinner_Genre"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:dropDownVerticalOffset="45dp"
+        android:background="@drawable/custom_spinner"/>
+    <ListView
+        android:layout_marginTop="15dp"
+        android:id="@+id/lv_listSong"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/music"
+        tools:listitem="@layout/list_item_song"/>
+
+</LinearLayout>

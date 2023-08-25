@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_USER_ID + " INTEGER,"
                 + COLUMN_FAVORITE_SONG_ID + " INTEGER,"
                 + " FOREIGN KEY (" + COLUMN_USER_ID + ") REFERENCES " + TABLE_NAME + "(" + COLUMN_USER_ID + "),"
-                + " FOREIGN KEY (" + COLUMN_SONG_ID + ") REFERENCES " + TABLE_SONGS + "(" + COLUMN_SONG_ID + "))";
+                + " FOREIGN KEY (" + COLUMN_FAVORITE_SONG_ID + ") REFERENCES " + TABLE_SONGS + "(" + COLUMN_SONG_ID + "))";
         db.execSQL(createFavoriteTableQuery);
     }
 
@@ -132,6 +132,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return isValid;
+    }
+
+    public boolean checkUsernameExists(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                new String[]{COLUMN_ID},
+                COLUMN_USERNAME + " = ?",
+                new String[]{username},
+                null,
+                null,
+                null
+        );
+
+        boolean usernameExists = cursor.getCount() > 0;
+        cursor.close();
+        return usernameExists;
     }
 
     public long addSong(String title, String artist, String genre, int path) {
@@ -283,6 +300,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return genreList;
     }
 
+    public List<Song> getSongsByGenre(int genreId) {
+        List<Song> songList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_SONG_ID, COLUMN_SONG_TITLE, COLUMN_SONG_ARTIST, COLUMN_SONG_GENRE, COLUMN_SONG_PATH};
+
+        String selection = COLUMN_SONG_GENRE + " = ?";
+        String[] selectionArgs = {String.valueOf(genreId)};
+
+        Cursor cursor = db.query(TABLE_SONGS, columns, selection, selectionArgs, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SONG_ID));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SONG_TITLE));
+                String artist = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SONG_ARTIST));
+                //String genreString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SONG_GENRE));
+                //int genreId = getGenreIdByName(genreString);
+                Genre genre = getGenreById(genreId);
+                int path = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SONG_PATH));
+                Song song = new Song(id, title, artist, genre, path);
+                songList.add(song);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        db.close();
+
+        return songList;
+    }
+
+
     // Thêm bài hát yêu thích cho người dùng
     public void addFavorite(int userId, int songId) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -301,8 +351,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Kiểm tra xem một bài hát có trong danh sách yêu thích của người dùng hay
-    // không
+    // Kiểm tra xem một bài hát có trong danh sách yêu thích của người dùng hay không
     public boolean isFavorite(int userId, int songId) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_FAVORITES, new String[] { COLUMN_FAVORITE_ID },

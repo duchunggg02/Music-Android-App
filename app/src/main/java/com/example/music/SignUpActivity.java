@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SignUpActivity extends AppCompatActivity {
-    Button tv_HaveAccount;
+    TextView tv_HaveAccount;
     Button buttonRegister;
     EditText edt_userName;
     EditText edt_pass2;
@@ -39,19 +40,30 @@ public class SignUpActivity extends AppCompatActivity {
                 String password1 = edt_pass1.getText().toString();
                 String confirmPassword = edt_pass2.getText().toString();
 
-                if (password1.equals(confirmPassword)) {
-                    // mật khẩu trùng khớp
-                    DatabaseHelper databaseHelper = new DatabaseHelper(SignUpActivity.this);
-                    long newRowId = databaseHelper.addUser(username1, password1);
+                // Kiểm tra xem tên đăng nhập đã tồn tại chưa
+                DatabaseHelper db = new DatabaseHelper(SignUpActivity.this);
+                boolean isUsernameExists = db.checkUsernameExists(username1);
 
-                    if (newRowId != -1) {
-                        Toast.makeText(SignUpActivity.this, "Đăng ký thành công!!!", Toast.LENGTH_SHORT).show();
-                        finish();
+                if(!username1.isEmpty() && !password1.isEmpty() && !confirmPassword.isEmpty()) {
+                    if (isUsernameExists) {
+                        Toast.makeText(SignUpActivity.this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (password1.equals(confirmPassword)) {
+                        long newRowId = db.addUser(username1, password1);
+
+                        if (newRowId != -1) {
+                            Toast.makeText(SignUpActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(SignUpActivity.this, "Đăng ký thất bại!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(SignUpActivity.this, "Mật khẩu không trùng khớp!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
             }
         });
