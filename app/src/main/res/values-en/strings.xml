@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Music Player</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="tv_hello">HELLO</string>
+    <string name="signin">SIGN IN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="logout">Log out</string>
+    <string name="changePass">Change password</string>
+    <string name="guestAccount">Guest account</string>
+    <string name="registerPrompt">You don\'t have an account yet? Register now</string>
+    <string name="signinPrompt">Do you already have an account? Sign in now</string>
+    <string name="search">Search song title, artist...</string>
+    <string name="favoriteSong">FAVORITE LIST</string>
+    <string name="changeLang">Change language</string>
+    <string name="typePrompt">Please enter full information</string>
+    <string name="signInSuccessfully">Sign in successfully</string>
+    <string name="signInUnsuccessfully">Sign in unsuccessfully</string>
+    <string name="signUpSuccessfully">Sign up successfully</string>
+    <string name="signUpUnsuccessfully">Sign up unsuccessfully</string>
+    <string name="isUsernameExist">Username available</string>
+    <string name="passNotMatch">Password does not match</string>
+    <string name="oldPass">Enter old password</string>
+    <string name="newPass1">Enter new password</string>
+    <string name="newPass2">Re-enter new password</string>
+    <string name="changPassSuccess">Change password successfully</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="person">Person</string>
+    <string name="genre">Genre</string>
+    <string name="selectLang">Select language</string>
+    <string name="vi">Vietnamese</string>
+    <string name="en">English</string>
+    <string name="addFavorite">Added to Favorites</string>
+    <string name="deleteFavorite">Removed from Favorites</string>
+    <string name="plsSignin">Sign in to continue</string>
+    <string name="notSongInFavorite">There are no songs in favorites list</string>
+</resources>

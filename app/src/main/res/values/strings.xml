@@ -1,3 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Music Player</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="confirmPassword">Xác nhận mật khẩu</string>
+    <string name="tv_hello">XIN CHÀO</string>
+    <string name="signin">ĐĂNG NHẬP</string>
+    <string name="signup">ĐĂNG KÝ</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="changePass">Đổi mật khẩu</string>
+    <string name="guestAccount">Tài khoản khách</string>
+    <string name="registerPrompt">Bạn chưa có tài khoản? Đăng ký ngay</string>
+    <string name="signinPrompt">Bạn đã có tài khoản? Đăng nhập ngay</string>
+    <string name="search">Tìm tên bài hát, ca sĩ...</string>
+    <string name="favoriteSong">DANH SÁCH YÊU THÍCH</string>
+    <string name="changeLang">Chuyển ngôn ngữ</string>
+    <string name="typePrompt">Vui lòng nhập đầy đủ thông tin</string>
+    <string name="signInSuccessfully">Đăng nhập thành công</string>
+    <string name="signInUnsuccessfully">Đăng nhập không thành công</string>
+    <string name="signUpSuccessfully">Đăng ký thành công</string>
+    <string name="signUpUnsuccessfully">Đăng ký không thành công</string>
+    <string name="isUsernameExist">Tên đăng nhập đã tồn tại</string>
+    <string name="passNotMatch">Mật khẩu không trùng khớp</string>
+    <string name="oldPass">Nhập mật khẩu cũ</string>
+    <string name="newPass1">Nhập mật khẩu mới</string>
+    <string name="newPass2">Nhập lại mật khẩu mới</string>
+    <string name="changPassSuccess">Đổi mật khẩu thành công</string>
+    <string name="home">Trang chủ</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="person">Cá nhân</string>
+    <string name="genre">Thể loại</string>
+    <string name="selectLang">Chọn ngôn ngữ</string>
+    <string name="vi">Tiếng Việt</string>
+    <string name="en">Tiếng Anh</string>
+    <string name="addFavorite">Đã thêm vào Yêu Thích</string>
+    <string name="deleteFavorite">Đã xóa khỏi Yêu Thích</string>
+    <string name="plsSignin">Vui lòng đăng nhập</string>
+    <string name="notSongInFavorite">Chưa có bài hát nào trong danh sách yêu thích</string>
 </resources>

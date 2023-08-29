@@ -151,6 +151,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return usernameExists;
     }
 
+    public void changePassword(int userId, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PASSWORD, newPassword);
+
+        db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(userId)});
+        db.close();
+    }
+
     public long addSong(String title, String artist, String genre, int path) {
 
         if (isSongExist(title, artist)) {

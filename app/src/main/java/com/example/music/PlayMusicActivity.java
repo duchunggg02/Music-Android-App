@@ -51,13 +51,14 @@ public class PlayMusicActivity extends AppCompatActivity {
     Animation anim;
     int pos = 0;
 
-    private boolean isPlaying;
+    private boolean isPlaying, isAnimationRunning = false;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleManager.setLocale(this);
         setContentView(R.layout.activity_play_music);
 
         prev = (Button) findViewById(R.id.btnPrev);
@@ -78,9 +79,11 @@ public class PlayMusicActivity extends AppCompatActivity {
 
         registerReceiver(stopSongReceiver, new IntentFilter("stop_song"));
 
-        // anim = AnimationUtils.loadAnimation(this, R.anim.rolate);
+
 
         Intent intent = getIntent();
+        anim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
+
 
         if (intent != null && intent.hasExtra("songList") && intent.hasExtra("position")) {
 
@@ -95,7 +98,7 @@ public class PlayMusicActivity extends AppCompatActivity {
             setTimeEnd();
             setTimeStart();
         }
-
+        updateFavoriteButtonState(db, userId);
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,13 +108,15 @@ public class PlayMusicActivity extends AppCompatActivity {
                     boolean isFavorite = db.isFavorite(userId, selectedSong.getId());
                     if (isFavorite) {
                         db.removeFavorite(userId, selectedSong.getId());
-                        Toast.makeText(PlayMusicActivity.this, "Đã xóa khỏi Yêu Thích", Toast.LENGTH_SHORT).show();
+                        favorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_favorite_24, 0, 0, 0);
+                        Toast.makeText(PlayMusicActivity.this, getString(R.string.deleteFavorite), Toast.LENGTH_SHORT).show();
                     } else {
                         db.addFavorite(userId, selectedSong.getId());
-                        Toast.makeText(PlayMusicActivity.this, "Đã thêm vào Yêu Thích", Toast.LENGTH_SHORT).show();
+                        favorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_favorite_24_red, 0, 0, 0);
+                        Toast.makeText(PlayMusicActivity.this, getString(R.string.addFavorite), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(PlayMusicActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlayMusicActivity.this, getString(R.string.plsSignin), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -122,14 +127,13 @@ public class PlayMusicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mp.isPlaying()) {
                     mp.pause();
-                    // play.setImageResource(R.drawable.);
+                    img.clearAnimation();
+                    play.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24,0,0,0);
                 } else {
                     mp.start();
-                    // play.setImageResource(R.drawable.);
+                    img.startAnimation(anim);
+                    play.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24,0,0,0);
                 }
-                // setTimeEnd();
-                // setTimeStart();
-                // img.startAnimation(anim);
             }
         });
 
@@ -141,6 +145,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                     pos = a.size() - 1;
                 }
                 playSongAtPosition(pos);
+                updateFavoriteButtonState(db, userId);
             }
         });
 
@@ -152,6 +157,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                     pos = 0;
                 }
                 playSongAtPosition(pos);
+                updateFavoriteButtonState(db, userId);
             }
         });
 
@@ -234,7 +240,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         }
         isPlaying = true;
         mp = MediaPlayer.create(this, song.getPath());
-
+        img.setAnimation(anim);
         mp.start();
     }
 
@@ -244,6 +250,9 @@ public class PlayMusicActivity extends AppCompatActivity {
         }
         mp = MediaPlayer.create(PlayMusicActivity.this, a.get(position).getPath());
         title.setText(a.get(position).getTitle());
+        img.clearAnimation();
+        img.startAnimation(anim);
+        play.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
         mp.start();
         setTimeEnd();
         setTimeStart();
@@ -317,6 +326,15 @@ public class PlayMusicActivity extends AppCompatActivity {
         }
     }
 
+    private void updateFavoriteButtonState(DatabaseHelper db,int userId) {
+        Song selectedSong = a.get(pos);
+        boolean isFavorite = db.isFavorite(userId, selectedSong.getId());
+        if (isFavorite) {
+            favorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_favorite_24_red, 0, 0, 0);
+        } else {
+            favorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_favorite_24, 0, 0, 0);
+        }
+    }
 
 
 }

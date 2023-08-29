@@ -3,14 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/BACKGROUND"
     tools:context=".PlayMusicActivity">
 
     <TextView
+        android:layout_marginTop="15dp"
         android:id="@+id/tv_SongName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tên bài hát"
-        android:textSize="30sp"/>
+        style="@style/TEXT"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="40sp"/>
 
     <Button
         android:id="@+id/btnPrev"
@@ -21,7 +26,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:drawableLeft="@drawable/baseline_skip_previous_24"
+        android:backgroundTint="@color/music"/>
 
     <Button
         android:id="@+id/btnPlay"
@@ -29,10 +36,12 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="130dp"
+        android:layout_marginLeft="185dp"
         android:layout_marginBottom="30dp"
         android:text=""
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/baseline_pause_24"
+        android:backgroundTint="@color/music"/>
 
     <Button
         android:id="@+id/btnFavorite"
@@ -40,10 +49,12 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="129dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="30dp"
         android:text=""
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/baseline_favorite_24"
+        android:backgroundTint="@color/music"/>
 
 
     <Button
@@ -55,7 +66,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="30dp"
+        android:drawableLeft="@drawable/baseline_skip_next_24"
+        android:backgroundTint="@color/music"/>
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -65,7 +78,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="100dp" />
+        android:layout_marginBottom="100dp"
+        android:maxHeight="5dp"
+        android:progressDrawable="@drawable/custom_seekbar"/>
 
     <TextView
         android:id="@+id/tvStart"
@@ -73,7 +88,8 @@
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar" />
+        android:layout_above="@+id/seekBar"
+        android:textColor="@color/music"/>
 
     <TextView
         android:id="@+id/tvEnd"
@@ -82,18 +98,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/seekBar"
-        android:layout_above="@+id/seekBar" />
+        android:layout_above="@+id/seekBar"
+        android:textColor="@color/music"/>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/disk"
         />
 
     <Button
         android:id="@+id/btn_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="255dp"
+        android:layout_marginBottom="30dp"
+        android:text="Button"
+        android:drawableLeft="@drawable/baseline_share_24"
+        android:backgroundTint="@color/music"/>
+
 
 </RelativeLayout>

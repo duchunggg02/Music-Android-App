@@ -19,6 +19,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleManager.setLocale(this);
         setContentView(R.layout.activity_sign_up);
         tv_HaveAccount = findViewById(R.id.tv_HaveAccount);
         buttonRegister = findViewById(R.id.txt_Register);
@@ -46,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(!username1.isEmpty() && !password1.isEmpty() && !confirmPassword.isEmpty()) {
                     if (isUsernameExists) {
-                        Toast.makeText(SignUpActivity.this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.isUsernameExist), Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -54,16 +55,16 @@ public class SignUpActivity extends AppCompatActivity {
                         long newRowId = db.addUser(username1, password1);
 
                         if (newRowId != -1) {
-                            Toast.makeText(SignUpActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, getString(R.string.signUpSuccessfully), Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, getString(R.string.signUpUnsuccessfully), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(SignUpActivity.this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.passNotMatch), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(SignUpActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.typePrompt), Toast.LENGTH_SHORT).show();
                 }
             }
         });

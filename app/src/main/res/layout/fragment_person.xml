@@ -5,13 +5,108 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="@color/white"
+    style="@style/BACKGROUND"
     tools:context=".PersonFragment">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="@drawable/person_ava_username"
+        android:padding="10dp">
+        
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:clipToOutline="true"
+            android:background="@drawable/custom_avatar"
+            android:src="@drawable/music_icon" />
+        <TextView
+            android:id="@+id/tv_username_avatar"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MUSIC PLAYER"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_oldPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="8dp"
+        android:hint="@string/oldPass"
+        android:padding="8dp"
+        android:inputType="textPassword"
+        android:textColor="@color/music"
+        android:textColorHighlight="@color/cardview_dark_background"
+        style="@style/TEXT2"
+
+        android:visibility="gone"/>
+    <EditText
+        android:id="@+id/et_newPassword1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="8dp"
+        android:inputType="textPassword"
+        android:hint="@string/newPass1"
+        android:padding="8dp"
+        android:textColor="@color/music"
+        android:textColorHighlight="@color/cardview_dark_background"
+        style="@style/TEXT2"
+        android:visibility="gone"/>
+    <EditText
+        android:id="@+id/et_newPassword2"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="8dp"
+        android:hint="@string/newPass2"
+        android:padding="8dp"
+        android:inputType="textPassword"
+        android:textColor="@color/music"
+        android:textColorHighlight="@color/cardview_dark_background"
+        style="@style/TEXT2"
+        android:visibility="gone"/>
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_changePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/music"
+        android:textColor="@color/white"
+        android:text="@string/changePass"/>
+
+
+
+    <Button
+        android:id="@+id/btn_changeLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/changeLang"
+        android:backgroundTint="@color/music"
+        android:textColor="@color/white"/>
+
 
     <Button
         android:id="@+id/btn_logOut"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đăng xuất"/>
+        android:text="@string/logout"
+        android:backgroundTint="@color/music"
+        android:textColor="@color/white" />
 
 </LinearLayout>

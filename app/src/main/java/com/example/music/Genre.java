@@ -62,7 +62,7 @@ public class Genre implements Parcelable {
 
     @Override
     public String toString() {
-        return name; // This is what will be displayed in the spinner
+        return name;
     }
 
 }

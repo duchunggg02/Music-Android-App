@@ -20,6 +20,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleManager.setLocale(this);
         setContentView(R.layout.activity_sign_in);
 
         editTextUsername = findViewById(R.id.editTextUsername);
@@ -56,26 +57,26 @@ public class SignInActivity extends AppCompatActivity {
                 boolean isValid = db.isUserValid(username, password);
 
                 if (isValid) {
-                    Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, getString(R.string.signInSuccessfully), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
 
-                    // Sau khi đăng nhập thành công, lưu tên người dùng vào SharedPreferences
+                    // Sau khi đăng nhập thành công, lưu info người dùng vào SharedPreferences
                     SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("username", username);
                     int userId = db.getUserId(username, password);
                     editor.putInt("userId", userId);
-                    // username là tên người dùng đã đăng nhập
+                    editor.putString("password",password);
                     editor.apply();
 
                 } else {
                     // Đăng nhập thất bại
-                    Toast.makeText(SignInActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, getString(R.string.signInUnsuccessfully), Toast.LENGTH_SHORT).show();
                 }
             } else {
-                    Toast.makeText(SignInActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, getString(R.string.typePrompt), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -86,10 +87,9 @@ public class SignInActivity extends AppCompatActivity {
         // Nếu tên người dùng đã lưu trong SharedPreferences không rỗng
         // tức là người dùng đã đăng nhập trước đó
         if (!username.isEmpty()) {
-            // Chuyển hướng đến MainActivity
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);
-            finish(); // Kết thúc SignInActivity để không thể quay lại màn hình đăng nhập
+            finish();
         }
     }
 }
